@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài tập JavaScript</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Bài tập JavaScript</h1>
+  </header>
+
+  <nav id="tabs" aria-label="Chọn bài tập">
+    <button class="active" onclick="showTab(0)">Tuyển sinh</button>
+    <button onclick="showTab(1)">Tiền điện</button>
+    <button onclick="showTab(2)">Thuế thu nhập cá nhân</button>
+    <button onclick="showTab(3)">Tiền cáp</button>
+  </nav>
+
+  <!-- BÀI 1: TUYỂN SINH -->
+  <section class="page active">
+    <div class="form">
+      <h2>Quản lý tuyển sinh</h2>
+      <p class="hint">Đậu khi tổng điểm ≥ điểm chuẩn và không có môn nào 0 điểm.</p>
+      <label for="stdScore">Điểm chuẩn của hội đồng</label>
+      <input id="stdScore" type="number" step="0.25" placeholder="Ví dụ: 20">
+      <div class="row">
+        <div><label for="s1">Môn 1</label><input id="s1" type="number" step="0.25" min="0" max="10"></div>
+        <div><label for="s2">Môn 2</label><input id="s2" type="number" step="0.25" min="0" max="10"></div>
+        <div><label for="s3">Môn 3</label><input id="s3" type="number" step="0.25" min="0" max="10"></div>
+      </div>
+      <label for="area">Khu vực</label>
+      <select id="area">
+        <option value="X">X – Không thuộc khu vực ưu tiên</option>
+        <option value="A">A – cộng 2 điểm</option>
+        <option value="B">B – cộng 1 điểm</option>
+        <option value="C">C – cộng 0.5 điểm</option>
+      </select>
+      <label for="object">Đối tượng dự thi</label>
+      <select id="object">
+        <option value="0">0 – Không thuộc đối tượng ưu tiên</option>
+        <option value="1">1 – cộng 2.5 điểm</option>
+        <option value="2">2 – cộng 1.5 điểm</option>
+        <option value="3">3 – cộng 1 điểm</option>
+      </select>
+      <button class="go" onclick="calcAdmission()">Xem kết quả</button>
+    </div>
+    <div class="receipt" id="admOut"><h3>Kết quả xét tuyển</h3><p class="empty">Nhập điểm rồi bấm “Xem kết quả”.</p></div>
+  </section>
+
+  <!-- BÀI 2: TIỀN ĐIỆN -->
+  <section class="page">
+    <div class="form">
+      <h2>Tính tiền điện</h2>
+      <p class="hint">Giá tăng dần theo từng bậc kW.</p>
+      <label for="elecName">Họ tên</label>
+      <input id="elecName" placeholder="Ví dụ: Nguyễn Văn A">
+      <label for="elecKw">Số kW tiêu thụ</label>
+      <input id="elecKw" type="number" min="0" placeholder="Ví dụ: 320">
+      <button class="go" onclick="calcElectric()">Tính tiền điện</button>
+    </div>
+    <div class="receipt" id="elecOut"><h3>Hóa đơn tiền điện</h3><p class="empty">Nhập họ tên và số kW rồi bấm “Tính tiền điện”.</p></div>
+  </section>
+
+  <!-- BÀI 3: THUẾ THU NHẬP CÁ NHÂN -->
+  <section class="page">
+    <div class="form">
+      <h2>Thuế thu nhập cá nhân</h2>
+      <p class="hint">Thu nhập chịu thuế = tổng thu nhập năm − 4 triệu − số người phụ thuộc × 1.6 triệu.</p>
+      <label for="taxName">Họ tên</label>
+      <input id="taxName" placeholder="Ví dụ: Trần Thị B">
+      <label for="taxIncome">Tổng thu nhập năm (VNĐ)</label>
+      <input id="taxIncome" type="number" min="0" placeholder="Ví dụ: 300000000">
+      <label for="taxDep">Số người phụ thuộc</label>
+      <input id="taxDep" type="number" min="0" value="0">
+      <button class="go" onclick="calcTax()">Tính thuế</button>
+    </div>
+    <div class="receipt" id="taxOut"><h3>Thông báo thuế</h3><p class="empty">Nhập thông tin rồi bấm “Tính thuế”.</p></div>
+  </section>
+
+  <!-- BÀI 4: TIỀN CÁP -->
+  <section class="page">
+    <div class="form">
+      <h2>Hóa đơn tiền cáp</h2>
+      <p class="hint">Chọn “Doanh nghiệp” để nhập số kết nối.</p>
+      <label for="cableId">Mã khách hàng</label>
+      <input id="cableId" placeholder="Ví dụ: KH001">
+      <label for="cableType">Loại khách hàng</label>
+      <select id="cableType" onchange="toggleConnections()">
+        <option value="">Chọn loại khách hàng</option>
+        <option value="home">Nhà dân</option>
+        <option value="biz">Doanh nghiệp</option>
+      </select>
+      <label for="cableConn">Số kết nối</label>
+      <input id="cableConn" type="number" min="0" placeholder="Chỉ dành cho doanh nghiệp" disabled>
+      <label for="cableChannel">Số kênh cao cấp</label>
+      <input id="cableChannel" type="number" min="0" placeholder="Ví dụ: 3">
+      <button class="go" onclick="calcCable()">Tính hóa đơn</button>
+    </div>
+    <div class="receipt" id="cableOut"><h3>Hóa đơn cáp</h3><p class="empty">Nhập thông tin rồi bấm “Tính hóa đơn”.</p></div>
+  </section>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/tuyen-sinh.js"></script>
+<script src="js/tien-dien.js"></script>
+<script src="js/thue-tncn.js"></script>
+<script src="js/tien-cap.js"></script>
+</body>
+</html>
