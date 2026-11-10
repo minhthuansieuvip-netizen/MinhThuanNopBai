@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài tập về nhà: Xử lý mảng</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Nhập số, thêm vào mảng, rồi chọn chức năng để xem kết quả.</h1>
+
+  <section>
+    <h2>Mảng số nguyên</h2>
+    <div class="row">
+      <input type="text" id="soNhap" placeholder="Nhập số nguyên (có thể nhập nhiều số, cách nhau bằng dấu cách hoặc dấu phẩy)">
+      <button id="btnThem">Thêm vào mảng</button>
+      <button class="alt" id="btnXoa">Xóa mảng</button>
+    </div>
+    <p id="mang">[ ]</p>
+  </section>
+
+  <section>
+    <h2>Chức năng</h2>
+    <div class="grid">
+      <button data-f="1">1. Tổng các số dương</button>
+      <button data-f="2">2. Đếm số dương</button>
+      <button data-f="3">3. Tìm số nhỏ nhất</button>
+      <button data-f="4">4. Tìm số dương nhỏ nhất</button>
+      <button data-f="5">5. Số chẵn cuối cùng</button>
+      <button data-f="6">6. Đổi chỗ 2 giá trị</button>
+      <button data-f="7">7. Sắp xếp tăng dần</button>
+      <button data-f="8">8. Số nguyên tố đầu tiên</button>
+      <button data-f="9">9. Đếm số nguyên trong mảng số thực</button>
+      <button data-f="10">10. So sánh số dương và số âm</button>
+    </div>
+  </section>
+
+  <section id="boxDoi" class="hide">
+    <h2>Đổi chỗ 2 giá trị theo vị trí (vị trí tính từ 0)</h2>
+    <div class="row">
+      <input type="number" id="viTri1" placeholder="Vị trí 1" min="0">
+      <input type="number" id="viTri2" placeholder="Vị trí 2" min="0">
+      <button id="btnDoi">Đổi chỗ</button>
+    </div>
+  </section>
+
+  <section id="boxThuc" class="hide">
+    <h2>Nhập mảng số thực</h2>
+    <div class="row">
+      <input type="text" id="soThuc" placeholder="Ví dụ: 1.5, 2, 3.7, 4">
+      <button id="btnDem">Đếm số nguyên</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kết quả</h2>
+    <div id="ketqua">Chưa có kết quả.</div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
